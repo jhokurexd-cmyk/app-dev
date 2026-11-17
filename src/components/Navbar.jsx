@@ -1,34 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useActiveSection from "../hooks/useActiveSection";
 
 const NAV_LINKS = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
-  { id: "hobbies", label: "Hobbies" },
-  { id: "goals", label: "Goals" },
+  { id: "skills", label: "Skills" },
   { id: "contact", label: "Contact" }
 ];
 
 const SECTION_IDS = NAV_LINKS.map((link) => link.id);
 
+const MODES = [
+  { id: "light", label: "Light" },
+  { id: "dark", label: "Dark" },
+  { id: "system", label: "System" }
+];
+
 function SunIcon() {
   return (
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-      <circle
-        cx="12"
-        cy="12"
-        r="4.2"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <g
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      >
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+      <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <g stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
         <path d="M12 2.6v2.4" />
         <path d="M12 19v2.4" />
         <path d="M2.6 12h2.4" />
@@ -44,7 +37,7 @@ function SunIcon() {
 
 function MoonIcon() {
   return (
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
       <path
         d="M20.2 14.6A8.4 8.4 0 1 1 9.4 3.8a6.9 6.9 0 0 0 10.8 10.8Z"
         fill="none"
@@ -56,54 +49,56 @@ function MoonIcon() {
   );
 }
 
-function Navbar({ theme, onToggleTheme }) {
+function Navbar({ mode, theme, onSelectMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [themeOpen, setThemeOpen] = useState(false);
   const active = useActiveSection(SECTION_IDS);
+  const themeRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 8);
+    const handleKey = (event) => {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      setThemeOpen(false);
+    };
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
   }, []);
+
+  useEffect(() => {
+    if (!themeOpen) return;
+
+    const handleClick = (event) => {
+      if (themeRef.current && !themeRef.current.contains(event.target)) {
+        setThemeOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [themeOpen]);
 
   useEffect(() => {
     if (!menuOpen) return;
 
-    const handleKey = (event) => {
-      if (event.key === "Escape") setMenuOpen(false);
-    };
-
-    const previousOverflow = document.body.style.overflow;
-
-    document.addEventListener("keydown", handleKey);
+    const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
     return () => {
-      document.removeEventListener("keydown", handleKey);
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = previous;
     };
   }, [menuOpen]);
 
-  const isDark = theme === "dark";
-
   return (
-    <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
+    <header className="site-header">
 
       <div className="header-inner">
 
         <a className="brand" href="#home">
-          <span className="brand-mark">JK</span>
-
-          <span className="brand-name">
-            Jhonard Kurt
-            <small>Full-Stack Developer</small>
-          </span>
+          Jhonard
         </a>
 
-        <nav className="primary-nav" aria-label="Sections">
+        <nav className="nav-pill" aria-label="Sections">
           <ul>
             {NAV_LINKS.map((link) => (
               <li key={link.id}>
@@ -121,19 +116,38 @@ function Navbar({ theme, onToggleTheme }) {
 
         <div className="header-actions">
 
-          <button
-            type="button"
-            className="icon-btn"
-            onClick={onToggleTheme}
-            aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-            title={isDark ? "Switch to light theme" : "Switch to dark theme"}
-          >
-            {isDark ? <SunIcon /> : <MoonIcon />}
-          </button>
+          <div className="theme-control" ref={themeRef}>
+            <button
+              type="button"
+              className="icon-btn"
+              onClick={() => setThemeOpen((open) => !open)}
+              aria-label="Change theme"
+              aria-haspopup="menu"
+              aria-expanded={themeOpen}
+            >
+              {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+            </button>
 
-          <a className="btn btn-primary btn-sm cv-link" href="/CV.png" download>
-            Download CV
-          </a>
+            {themeOpen && (
+              <div className="theme-menu" role="menu">
+                {MODES.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    role="menuitemradio"
+                    aria-checked={mode === item.id}
+                    className={mode === item.id ? "is-selected" : undefined}
+                    onClick={() => {
+                      onSelectMode(item.id);
+                      setThemeOpen(false);
+                    }}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
           <button
             type="button"
@@ -156,10 +170,7 @@ function Navbar({ theme, onToggleTheme }) {
 
       {menuOpen && (
         <>
-          <div
-            className="menu-backdrop"
-            onClick={() => setMenuOpen(false)}
-          ></div>
+          <div className="menu-backdrop" onClick={() => setMenuOpen(false)}></div>
 
           <div className="mobile-menu" id="mobile-menu">
             <nav aria-label="Sections">
@@ -179,7 +190,7 @@ function Navbar({ theme, onToggleTheme }) {
             </nav>
 
             <a
-              className="btn btn-primary"
+              className="btn btn-solid"
               href="/CV.png"
               download
               onClick={() => setMenuOpen(false)}

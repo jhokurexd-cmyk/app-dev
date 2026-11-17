@@ -7,15 +7,13 @@ import Background from "./components/Background";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
-import Skills from "./components/Skills";
 import Projects from "./components/Projects";
-import Hobbies from "./components/Hobbies";
-import Goals from "./components/Goals";
+import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 function App() {
-  const { theme, toggleTheme } = useTheme();
+  const { mode, theme, setMode } = useTheme();
 
   useScrollReveal();
 
@@ -27,20 +25,16 @@ function App() {
 
       <Background />
 
-      <Navbar theme={theme} onToggleTheme={toggleTheme} />
+      <Navbar mode={mode} theme={theme} onSelectMode={setMode} />
 
       <main id="main">
         <Hero />
 
         <About />
 
-        <Skills />
-
         <Projects />
 
-        <Hobbies />
-
-        <Goals />
+        <Skills />
 
         <Contact />
       </main>

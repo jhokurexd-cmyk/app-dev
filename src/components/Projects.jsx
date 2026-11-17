@@ -1,147 +1,76 @@
+import shotPortal from "../assets/shot-ccabst-portal.jpg";
+import shotHandbook from "../assets/shot-ccabst-handbook.jpg";
+import shotHistoury from "../assets/shot-histoury.jpg";
+import shotJmc from "../assets/shot-jmc.jpg";
 import interview from "../assets/interview.png";
 import roblox from "../assets/roblox.png";
 
-const FEATURED = [
+const PROJECTS = [
   {
-    type: "FULL-STACK · INTERNAL TOOL",
+    image: shotPortal,
+    tag: "web app",
     title: "CCABST Staff Portal",
-    tagline: "Operations portal for the staff team of a buy-and-sell community.",
     description:
-      "Staff log completed transactions and upload private proof, and admins verify them. The server parses every transaction post itself, stamps it in Philippine time, and credits it to the signed-in staff member, so records cannot be backdated or reassigned from the browser.",
-    features: [
-      "Verification, dispute and cancellation workflow with private evidence storage",
-      "SHA-256 screenshot fingerprinting that blocks duplicate submissions",
-      "Leaderboards, quotas and per-staff performance history",
-      "Single-claim QR vouchers, Excel exports and a full audit log",
-      "Installable PWA with light and dark themes and mobile record cards"
-    ],
-    tech: [
-      "React 19",
-      "TypeScript",
-      "Tailwind CSS",
-      "Cloudflare Workers",
-      "Hono",
-      "D1",
-      "R2",
-      "Vite",
-      "PWA",
-      "Playwright"
-    ],
-    links: [
-      { label: "Live site", url: "https://ccabst-staff-portal.vercel.app" }
-    ]
+      "Role-based portal where community staff log completed transactions with private proof and admins verify them. The server parses and timestamps every post itself, so records can't be backdated.",
+    tech: ["React 19", "TypeScript", "Cloudflare Workers", "Hono", "D1", "R2", "Tailwind", "Playwright"],
+    links: [{ label: "Live Demo", url: "https://ccabst-staff-portal.vercel.app" }]
   },
   {
-    type: "FRONT-END · PUBLIC SITE",
+    image: shotHandbook,
+    tag: "web app",
     title: "CCABST Web Handbook",
-    tagline: "The community's public handbook and voucher desk.",
     description:
-      "The public-facing companion to the staff portal. It gathers the ranked staff directory, community rules, policies, refund process, bulletin and feedback channels into one place, and lets members claim a voucher or check its status.",
-    features: [
-      "Nine routed pages inside a single-page app shell",
-      "Voucher claiming by code or QR image, decoded on the member's own device",
-      "Ranked staff directory with verified profile links"
-    ],
+      "The community's public handbook: ranked staff directory, rules, policies, refunds and bulletin, plus voucher claiming by code or QR image decoded on the member's own device.",
     tech: ["React", "Vite", "React Router", "Vercel"],
-    links: [{ label: "Live site", url: "https://ccabst-handbook.vercel.app" }]
+    links: [{ label: "Live Demo", url: "https://ccabst-handbook.vercel.app" }]
   },
   {
-    type: "MOBILE + WEB · THREE DELIVERABLES",
+    image: shotHistoury,
+    tag: "mobile + web",
     title: "Histoury",
-    tagline:
-      "A heritage-tourism platform for Intramuros: Android app, admin panel and landing page.",
     description:
-      "An Android guide to the historic sites of Intramuros, backed by a web admin panel the team uses to manage its content and a landing page that distributes the app. The app maps the sites, routes visitors to them turn by turn, unlocks content when they arrive, and renders AR scenes on location.",
-    features: [
-      "Kotlin and Jetpack Compose app with AR scenes, maps, turn-by-turn directions and geofenced arrivals",
-      "Itineraries, audio guides, offline downloads, reviews and rankings",
-      "Firebase Auth, Firestore, Storage, Cloud Functions and App Check",
-      "Admin panel for sites, places, AR timelines, geofences, users, ratings and feedback",
-      "Scroll-driven landing page with install guide, FAQ and a checksum-verified APK release"
-    ],
-    tech: [
-      "Kotlin",
-      "Jetpack Compose",
-      "Material 3",
-      "ARCore",
-      "MapLibre",
-      "Firebase",
-      "React 19",
-      "Leaflet",
-      "Vite"
-    ],
+      "An Android heritage guide to Intramuros with AR scenes, maps, turn-by-turn directions, audio guides and offline downloads — plus a web admin panel and a landing page that ships the app.",
+    tech: ["Kotlin", "Jetpack Compose", "ARCore", "MapLibre", "Firebase", "React 19", "Leaflet"],
     links: [
-      { label: "Landing page", url: "https://histoury-landing.vercel.app" },
-      { label: "Admin panel", url: "https://histouryadmin.vercel.app" },
-      {
-        label: "App on GitHub",
-        url: "https://github.com/jhokurexd-cmyk/histoury-android"
-      }
+      { label: "Live Demo", url: "https://histoury-landing.vercel.app" },
+      { label: "GitHub", url: "https://github.com/jhokurexd-cmyk/histoury-android" }
     ]
   },
   {
-    type: "FULL-STACK · CLINIC SOFTWARE",
-    title: "JMC Dental Clinic Management System",
-    tagline: "Patient records, billing and scheduling for a dental practice.",
+    image: shotJmc,
+    tag: "web app",
+    title: "JMC Dental Clinic",
     description:
-      "A management system for a solo-dentist clinic, covering patient records, visit history, procedures, appointments and income in one app. Billing runs on an append-only ledger: balances are always computed from entries and mistakes are corrected with new entries instead of edits, which keeps the clinic's books auditable.",
-    features: [
-      "Append-only ledger with voids, refunds and sequential printable receipts",
-      "Braces installment packages with editable pricing and tracked freebie benefits",
-      "Appointment calendar with overlap warnings and visit close-out",
-      "X-ray uploads, daily, weekly and monthly income, and CSV report exports",
-      "Owner, dentist and staff roles, hashed credentials and an audit row on every change"
-    ],
-    tech: [
-      "React",
-      "Vite",
-      "React Router",
-      "FullCalendar",
-      "Node.js",
-      "Express",
-      "Prisma",
-      "PostgreSQL",
-      "JWT",
-      "Docker"
-    ],
+      "Clinic management for a solo dentist: patient records, append-only billing ledger with voids and refunds, braces packages, appointments, X-rays and income reports.",
+    tech: ["React", "Node.js", "Express", "Prisma", "PostgreSQL", "FullCalendar", "Docker"],
     links: [
-      { label: "Live site", url: "https://jmc-weld.vercel.app" },
+      { label: "Live Demo", url: "https://jmc-weld.vercel.app" },
       { label: "GitHub", url: "https://github.com/jhokurexd-cmyk/JMC" }
     ]
-  }
-];
-
-const GAMES = [
+  },
   {
     image: interview,
+    contain: true,
+    tag: "game",
     title: "The Interview Room",
     description:
       "A Roblox experience focused on immersive interaction and environment design.",
-    tag: "Roblox Studio"
+    tech: ["Roblox Studio"],
+    links: []
   },
   {
     image: roblox,
+    contain: true,
+    tag: "game",
     title: "Sword Warfare Tycoon",
     description:
       "A tycoon-based Roblox game focused on progression systems and combat gameplay.",
-    tag: "Roblox Studio"
+    tech: ["Roblox Studio"],
+    links: []
   }
 ];
 
-function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-      <path
-        d="M7 17L17 7M17 7H9M17 7v8"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+const MAX_CHIPS = 4;
 
 function Projects() {
   return (
@@ -150,100 +79,70 @@ function Projects() {
       <div className="container">
 
         <div className="section-head" data-reveal>
-          <span className="eyebrow">FEATURED WORK</span>
-
-          <h2>
-            My <span className="accent">Projects</span>
-          </h2>
-
-          <p className="section-sub">
-            Four products in production — what each one does, and what it
-            runs on.
-          </p>
+          <h2>Featured Projects</h2>
+          <p className="section-sub">Some of my best work</p>
         </div>
 
         <div className="project-grid">
 
-          {FEATURED.map((project) => (
+          {PROJECTS.map((project) => {
+            const shown = project.tech.slice(0, MAX_CHIPS);
+            const extra = project.tech.length - shown.length;
 
-            <article className="card project-card" data-reveal key={project.title}>
+            return (
+              <article className="project-card" data-reveal key={project.title}>
 
-              <header className="project-head">
-                <span className="eyebrow eyebrow-amber">{project.type}</span>
+                <div
+                  className={
+                    project.contain ? "project-media is-contain" : "project-media"
+                  }
+                >
+                  <img src={project.image} alt={project.title} loading="lazy" />
+                </div>
 
-                <h3>{project.title}</h3>
+                <div className="project-body">
 
-                <p className="project-tagline">{project.tagline}</p>
-              </header>
+                  <span className="project-tag">{project.tag}</span>
 
-              <p className="project-body">{project.description}</p>
+                  <h3>{project.title}</h3>
 
-              <ul className="feature-list">
-                {project.features.map((feature) => (
-                  <li key={feature}>{feature}</li>
-                ))}
-              </ul>
+                  <p>{project.description}</p>
 
-              <ul className="chip-row">
-                {project.tech.map((tech) => (
-                  <li className="chip" key={tech}>
-                    {tech}
-                  </li>
-                ))}
-              </ul>
+                  <ul className="chip-row">
+                    {shown.map((item) => (
+                      <li className="chip" key={item}>
+                        {item}
+                      </li>
+                    ))}
 
-              <footer className="project-links">
-                {project.links.map((link) => (
-                  <a
-                    className="link-btn"
-                    key={link.url}
-                    href={link.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {link.label}
-                    <ArrowIcon />
-                  </a>
-                ))}
-              </footer>
+                    {extra > 0 && <li className="chip chip-more">+{extra}</li>}
+                  </ul>
 
-            </article>
+                  {project.links.length > 0 && (
+                    <div className="project-links">
+                      {project.links.map((link) => (
+                        <a
+                          key={link.url}
+                          href={link.url}
+                          className={
+                            link.label === "GitHub"
+                              ? "btn btn-outline btn-sm"
+                              : "btn btn-outline btn-sm btn-grow"
+                          }
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
 
-          ))}
+                </div>
 
-        </div>
-
-        <div className="section-head subhead" data-reveal>
-          <span className="eyebrow">ALSO BUILT</span>
-
-          <h2>
-            Game <span className="accent">Development</span>
-          </h2>
-        </div>
-
-        <div className="game-grid">
-
-          {GAMES.map((game) => (
-
-            <article className="card game-card" data-reveal key={game.title}>
-
-              <div className="game-media">
-                <img src={game.image} alt={game.title} />
-              </div>
-
-              <div className="game-body">
-                <h3>{game.title}</h3>
-
-                <p>{game.description}</p>
-
-                <ul className="chip-row">
-                  <li className="chip">{game.tag}</li>
-                </ul>
-              </div>
-
-            </article>
-
-          ))}
+              </article>
+            );
+          })}
 
         </div>
 

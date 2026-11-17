@@ -18,9 +18,8 @@ function readSystem() {
     : "light";
 }
 
-function readInitial() {
-  // index.html already resolved this before first paint; trust it so the
-  // first render matches what is on screen.
+function readApplied() {
+  // index.html already resolved this before first paint.
   if (typeof document !== "undefined") {
     const applied = document.documentElement.getAttribute("data-theme");
     if (applied === "light" || applied === "dark") return applied;
@@ -29,44 +28,44 @@ function readInitial() {
 }
 
 /**
- * Theme state for the whole page.
+ * Three-way theme control: "light", "dark" or "system".
  *
- * First visit follows the operating system. Once the visitor uses the
- * toggle, their choice is stored and wins from then on.
+ * "system" stores nothing and follows the OS live. Picking light or dark
+ * stores that choice, and it wins until the visitor goes back to system.
+ *
+ * Returns the chosen `mode` and the `theme` actually on screen.
  */
 export default function useTheme() {
-  const [theme, setTheme] = useState(readInitial);
+  const [mode, setModeState] = useState(() => readStored() || "system");
+  const [theme, setTheme] = useState(readApplied);
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return;
-
-    const query = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const handleChange = (event) => {
-      // a stored preference is deliberate, so leave it alone
-      if (readStored()) return;
-      setTheme(event.matches ? "dark" : "light");
+    const apply = () => {
+      const next = mode === "system" ? readSystem() : mode;
+      setTheme(next);
+      document.documentElement.setAttribute("data-theme", next);
     };
 
-    query.addEventListener("change", handleChange);
-    return () => query.removeEventListener("change", handleChange);
+    apply();
+
+    if (mode !== "system" || typeof window === "undefined" || !window.matchMedia) {
+      return;
+    }
+
+    const query = window.matchMedia("(prefers-color-scheme: dark)");
+    query.addEventListener("change", apply);
+    return () => query.removeEventListener("change", apply);
+  }, [mode]);
+
+  const setMode = useCallback((next) => {
+    try {
+      if (next === "system") localStorage.removeItem(STORAGE_KEY);
+      else localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      /* private browsing — the choice still applies for this visit */
+    }
+    setModeState(next);
   }, []);
 
-  const toggleTheme = useCallback(() => {
-    setTheme((previous) => {
-      const next = previous === "dark" ? "light" : "dark";
-      try {
-        localStorage.setItem(STORAGE_KEY, next);
-      } catch {
-        /* private browsing, storage full — the toggle still works for this visit */
-      }
-      return next;
-    });
-  }, []);
-
-  return { theme, toggleTheme };
+  return { mode, theme, setMode };
 }

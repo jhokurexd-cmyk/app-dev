@@ -1,87 +1,35 @@
+/**
+ * Logos come from Devicon (MIT), loaded in index.html.
+ *
+ * `icon`  — a Devicon font class.
+ * `mono`  — the brand colour is near-black (Express, GitHub, Prisma, Vercel),
+ *           so it is drawn in the current text colour instead and stays
+ *           visible in both themes.
+ * `text`  — fallback initials for the few tools Devicon has no icon for.
+ */
 const SKILLS = [
-  {
-    icon: "🧩",
-    title: "Frontend",
-    description:
-      "Building responsive, themed interfaces as single-page apps.",
-    stack: [
-      "React 19",
-      "TypeScript",
-      "JavaScript",
-      "HTML",
-      "CSS",
-      "Tailwind CSS",
-      "Vite"
-    ]
-  },
-  {
-    icon: "⚙️",
-    title: "Backend & APIs",
-    description:
-      "Writing the APIs behind them, with validation and auth on every route.",
-    stack: [
-      "Node.js",
-      "Express",
-      "Hono",
-      "Cloudflare Workers",
-      "REST APIs",
-      "JWT",
-      "Zod"
-    ]
-  },
-  {
-    icon: "🗄️",
-    title: "Databases & Storage",
-    description:
-      "Modelling data, writing migrations and keeping private files private.",
-    stack: [
-      "PostgreSQL",
-      "Prisma",
-      "Cloudflare D1",
-      "Firebase Firestore",
-      "R2",
-      "Firebase Storage"
-    ]
-  },
-  {
-    icon: "📱",
-    title: "Mobile & AR",
-    description:
-      "Native Android apps with maps, location and augmented reality.",
-    stack: [
-      "Kotlin",
-      "Jetpack Compose",
-      "Material 3",
-      "ARCore",
-      "MapLibre",
-      "Google Maps SDK"
-    ]
-  },
-  {
-    icon: "🚀",
-    title: "Tooling & Deployment",
-    description: "Shipping to production, and testing what I ship.",
-    stack: [
-      "Git & GitHub",
-      "Vercel",
-      "Wrangler",
-      "Docker",
-      "Playwright",
-      "PWA"
-    ]
-  },
-  {
-    icon: "🎨",
-    title: "Design & Game Dev",
-    description:
-      "Designing the interfaces I build, and making games for the fun of it.",
-    stack: [
-      "UI design",
-      "Responsive layouts",
-      "Light & dark theming",
-      "Roblox Studio"
-    ]
-  }
+  { name: "React", icon: "devicon-react-original" },
+  { name: "TypeScript", icon: "devicon-typescript-plain" },
+  { name: "JavaScript", icon: "devicon-javascript-plain" },
+  { name: "Kotlin", icon: "devicon-kotlin-plain" },
+  { name: "Jetpack Compose", icon: "devicon-jetpackcompose-plain" },
+  { name: "ARCore", text: "AR" },
+  { name: "Node.js", icon: "devicon-nodejs-plain" },
+  { name: "Express", icon: "devicon-express-original", mono: true },
+  { name: "Hono", text: "Ho" },
+  { name: "Cloudflare Workers", icon: "devicon-cloudflareworkers-plain" },
+  { name: "PostgreSQL", icon: "devicon-postgresql-plain" },
+  { name: "Prisma", icon: "devicon-prisma-original", mono: true },
+  { name: "Cloudflare D1", icon: "devicon-cloudflare-plain" },
+  { name: "Firebase", icon: "devicon-firebase-plain" },
+  { name: "Tailwind CSS", icon: "devicon-tailwindcss-original" },
+  { name: "Vite", icon: "devicon-vitejs-plain" },
+  { name: "MapLibre", text: "ML" },
+  { name: "Docker", icon: "devicon-docker-plain" },
+  { name: "Playwright", icon: "devicon-playwright-plain" },
+  { name: "Git & GitHub", icon: "devicon-github-original", mono: true },
+  { name: "Vercel", icon: "devicon-vercel-original", mono: true },
+  { name: "Roblox Studio", text: "Rb" }
 ];
 
 function Skills() {
@@ -91,44 +39,32 @@ function Skills() {
       <div className="container">
 
         <div className="section-head" data-reveal>
-          <span className="eyebrow">WHAT I USE</span>
-
-          <h2>
-            My <span className="accent">Skills</span>
-          </h2>
-
-          <p className="section-sub">
-            The stack behind the projects below.
-          </p>
+          <h2>Skills &amp; Tools</h2>
+          <p className="section-sub">Technologies I build with</p>
         </div>
 
-        <div className="card-grid skills-grid">
-
+        <ul className="skill-grid" data-reveal>
           {SKILLS.map((skill) => (
+            <li className="skill-tile" key={skill.name}>
 
-            <article className="card skill-card" data-reveal key={skill.title}>
-
-              <span className="card-icon" aria-hidden="true">
-                {skill.icon}
+              <span className="skill-mark">
+                {skill.icon ? (
+                  <i
+                    className={skill.mono ? skill.icon : `${skill.icon} colored`}
+                    aria-hidden="true"
+                  ></i>
+                ) : (
+                  <span className="skill-initials" aria-hidden="true">
+                    {skill.text}
+                  </span>
+                )}
               </span>
 
-              <h3>{skill.title}</h3>
+              <span className="skill-name">{skill.name}</span>
 
-              <p>{skill.description}</p>
-
-              <ul className="chip-row">
-                {skill.stack.map((item) => (
-                  <li className="chip" key={item}>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-            </article>
-
+            </li>
           ))}
-
-        </div>
+        </ul>
 
       </div>
 
