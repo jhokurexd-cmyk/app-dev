@@ -2,65 +2,63 @@ import bgImage from "../assets/bg.png";
 
 function About() {
   return (
-    <section className="about-section" id="about">
+    <section className="section" id="about">
 
-      <div className="about-title">
+      <div className="container">
 
-        <h2>
-          About <span>Me</span>
-        </h2>
+        <div className="section-head" data-reveal>
+          <span className="eyebrow">WHO I AM</span>
 
-        <div className="divider"></div>
-
-      </div>
-
-      <div className="about-wrapper">
-
-        <div className="about-image">
-          <img
-            src={bgImage}
-            alt="About"
-          />
+          <h2>
+            About <span className="accent">Me</span>
+          </h2>
         </div>
 
-        <div className="about-card">
+        <div className="about-grid">
 
-          <p>
-            Hi! I am
-            <span className="highlight-blue">
-              {" "}Jhonard Kurt Reyes
-            </span>
-            , a BSIT student.
-            Ever since I was young, video games have been more than
-            entertainment; they sparked imagination, creativity,
-            and inspiration.
-          </p>
+          <figure className="about-media" data-reveal>
+            <img src={bgImage} alt="" />
+          </figure>
 
-          <p>
-            I dream of creating my own games, building worlds,
-            characters, and stories.
-            Learning programming and technology is helping me gain
-            the skills to turn ideas into playable experiences.
-          </p>
+          <div className="card prose" data-reveal>
 
-          <p>
-            I also enjoy
-            <span className="highlight-yellow">
-              {" "}UI design
-            </span>
-            and
-            <span className="highlight-yellow">
-              {" "}drawing
-            </span>
-            , especially creating houses and environments.
-          </p>
+            <p>
+              Hi! I am{" "}
+              <strong className="mark-accent">Jhonard Kurt Reyes</strong>, a
+              BSIT student and full-stack developer. Ever since I was young,
+              video games have been more than entertainment; they sparked
+              imagination, creativity, and inspiration.
+            </p>
 
-          <p>
-            I work best when fully invested,
-            I collaborate well,
-            and I am always open to learning
-            and improving my skills.
-          </p>
+            <p>
+              That curiosity turned into building software other people
+              depend on: a staff portal a buy-and-sell community runs its
+              daily operations on, a management system for a dental clinic,
+              and{" "}
+              <strong className="mark-highlight">Histoury</strong>, an
+              augmented-reality heritage guide to Intramuros with its own
+              admin panel behind it.
+            </p>
+
+            <p>
+              I still dream of creating my own games, building worlds,
+              characters, and stories, and every system I ship teaches me
+              something I can take back to that.
+            </p>
+
+            <p>
+              I also enjoy{" "}
+              <strong className="mark-highlight">UI design</strong> and{" "}
+              <strong className="mark-highlight">drawing</strong>, especially
+              creating houses and environments.
+            </p>
+
+            <p>
+              I work best when fully invested, I collaborate well, and I am
+              always open to learning and improving my skills.
+            </p>
+
+          </div>
 
         </div>
 

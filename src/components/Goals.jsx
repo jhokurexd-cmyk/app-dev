@@ -2,51 +2,45 @@ import goal from "../assets/goal.png";
 
 function Goals() {
   return (
-    <section
-      className="goals-section"
-      id="goals"
-    >
+    <section className="section" id="goals">
 
-      <div className="section-title">
+      <div className="container">
 
-        <small>
-          MY FUTURE
-        </small>
+        <div className="section-head" data-reveal>
+          <span className="eyebrow">MY FUTURE</span>
 
-        <h2>
-          My <span>Goals</span>
-        </h2>
+          <h2>
+            My <span className="accent">Goals</span>
+          </h2>
+        </div>
 
-        <div className="divider"></div>
+        <div className="goals-grid">
 
-      </div>
+          <figure className="goal-media" data-reveal>
+            <img src={goal} alt="" />
+          </figure>
 
-      <div className="goals-container">
+          <div className="card prose goal-card" data-reveal>
 
-        <img
-          src={goal}
-          alt="Goal"
-          className="goal-image"
-        />
+            <p>
+              My goal is to become a skilled developer who ships software
+              people rely on, and to keep moving toward building games and
+              immersive worlds of my own.
+            </p>
 
-        <div className="goal-card">
+            <p>
+              I want to deepen my programming, system design, and UI
+              development skills while continuously learning new
+              technologies and tightening how I test and deploy what I
+              build.
+            </p>
 
-          <p>
-            My goal is to become a skilled game developer creating
-            meaningful interactive experiences and immersive worlds.
-          </p>
+            <p>
+              Through dedication and creativity, I hope to build projects
+              that inspire, entertain, and positively impact others.
+            </p>
 
-          <p>
-            I want to improve my programming,
-            game design, and UI development skills
-            while continuously learning new technologies.
-          </p>
-
-          <p>
-            Through dedication and creativity,
-            I hope to build projects that inspire,
-            entertain, and positively impact others.
-          </p>
+          </div>
 
         </div>
 

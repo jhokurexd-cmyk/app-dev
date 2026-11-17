@@ -4,7 +4,49 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>my-portfolio</title>
+
+    <title>Jhonard Kurt Reyes — Full-Stack Developer</title>
+
+    <meta
+      name="description"
+      content="Portfolio of Jhonard Kurt Reyes, a BSIT student and full-stack developer building web and mobile products — community operations portals, clinic management software and an AR heritage guide for Android."
+    />
+
+    <meta name="theme-color" content="#f6f8fc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#080d1a" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Jhonard Kurt Reyes — Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="BSIT student and full-stack developer. Web, mobile and AR projects built with React, Node, Cloudflare Workers and Kotlin."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      // Applied before first paint so the correct theme never flashes.
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var theme =
+            saved === "light" || saved === "dark"
+              ? saved
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+          document.documentElement.setAttribute("data-theme", theme);
+          document.documentElement.classList.add("reveal-ready");
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
